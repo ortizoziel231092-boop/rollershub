@@ -46,7 +46,7 @@ body { font-family: system-ui, -apple-system, sans-serif; background: #fff; colo
 header { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #eee; z-index: 20; }
 header .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; min-height: 68px; }
 header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: .6px; color: #111; text-decoration: none; white-space: nowrap; }
-header .logo img { height: 46px; width: 46px; background: #111; border-radius: 50%; padding: 5px; display: block; }
+header .logo img { height: 58px; width: 58px; display: block; }
 header .actions { display: flex; gap: 4px; align-items: center; }
 .globe { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: #111; }
 .menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: 0; color: #111; cursor: pointer; border-radius: 12px; }
@@ -100,14 +100,14 @@ footer .place { opacity: .7; }
 footer .credit { margin-top: 10px; opacity: .7; }
 .sticky { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 15; }
 .sticky .info { display: flex; align-items: center; gap: 10px; }
-.sticky .info img { height: 44px; width: 44px; background: #111; border-radius: 50%; padding: 5px; display: block; }
+.sticky .info img { height: 46px; width: 46px; display: block; }
 
 /* ---------- Tablet / escritorio ---------- */
 @media (min-width: 768px) {
   [id] { scroll-margin-top: 92px; }
   header .bar { padding: 12px 24px; min-height: 78px; }
   header .logo { font-size: 20px; gap: 12px; }
-  header .logo img { height: 52px; width: 52px; padding: 6px; }
+  header .logo img { height: 66px; width: 66px; }
   .menu-btn, .menu, .menu.open { display: none; }
   .nav-desk { display: flex; align-items: center; gap: 22px; }
   .nav-desk a { color: #111; text-decoration: none; font-weight: 600; font-size: 15px; }
@@ -182,7 +182,7 @@ footer .credit { margin-top: 10px; opacity: .7; }
 </svg>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#inicio"><img src="img/logo-rollershub.webp" width="128" height="128" alt="Logo de RollersHub"> ROLLERS HUB</a>
+    <a class="logo" href="#inicio"><img src="img/logo-rollershub-negro.webp" width="128" height="128" alt="Logo de RollersHub"> ROLLERS HUB</a>
     <nav class="nav-desk" aria-label="Principal">
       <a href="#recos">Recos</a>
       <a href="#comunidad">Comunidad</a>
@@ -221,21 +221,21 @@ footer .credit { margin-top: 10px; opacity: .7; }
   <div class="spacer"></div>
 </section>
 
-<section class="section" id="explora">
-  <div class="wrap cards">
-    <div class="card" id="recos"><img src="img/card-proximos-recos.webp" width="480" height="853" alt="Próximos Recos: patinador sonriente rodando por la calle en patines en línea"><div class="cap">Próximos Recos</div></div>
-    <div class="card" id="comunidad"><img src="img/card-la-comunidad.webp" width="480" height="718" alt="La comunidad: patinadora con casco mostrando su patín en línea"><div class="cap">La comunidad</div></div>
-    <div class="card" id="tienda"><img src="img/card-tienda-roller.webp" width="480" height="853" alt="Tienda Roller: patines en línea y casco sobre una cama"><div class="cap">Tienda Roller</div></div>
-    <div class="card" id="eventos"><img src="img/card-unete-evento.webp" width="480" height="653" alt="Únete a un evento: patinador practicando entre conos en una pista al atardecer"><div class="cap">Únete a un evento</div></div>
-  </div>
-</section>
-
 <section class="section" id="ventajas">
   <div class="wrap icons">
     <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg></div><div>Patina seguro con la comunidad.</div></div>
     <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg></div><div>Recos y eventos cerca de ti.</div></div>
     <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bag"/></svg></div><div>Equipo y marcas de confianza.</div></div>
     <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-handshake"/></svg></div><div>Aliados que apoyan el patín.</div></div>
+  </div>
+</section>
+
+<section class="section" id="explora">
+  <div class="wrap cards">
+    <div class="card" id="recos"><img src="img/card-proximos-recos.webp" width="480" height="853" alt="Próximos Recos: patinador sonriente rodando por la calle en patines en línea"><div class="cap">Próximos Recos</div></div>
+    <div class="card" id="comunidad"><img src="img/card-la-comunidad.webp" width="480" height="718" alt="La comunidad: patinadora con casco mostrando su patín en línea"><div class="cap">La comunidad</div></div>
+    <div class="card" id="tienda"><img src="img/card-tienda-roller.webp" width="480" height="853" alt="Tienda Roller: patines en línea y casco sobre una cama"><div class="cap">Tienda Roller</div></div>
+    <div class="card" id="eventos"><img src="img/card-unete-evento.webp" width="480" height="653" alt="Únete a un evento: patinador practicando entre conos en una pista al atardecer"><div class="cap">Únete a un evento</div></div>
   </div>
 </section>
 
@@ -283,7 +283,7 @@ footer .credit { margin-top: 10px; opacity: .7; }
 </footer>
 
 <div class="sticky">
-  <div class="info"><img src="img/logo-rollershub.webp" width="128" height="128" alt="Logo de RollersHub"><div><strong>RollersHub</strong><div style="font-size:12px;opacity:.7">Únete a la comunidad</div></div></div>
+  <div class="info"><img src="img/logo-rollershub-negro.webp" width="128" height="128" alt="Logo de RollersHub"><div><strong>RollersHub</strong><div style="font-size:12px;opacity:.7">Únete a la comunidad</div></div></div>
   <a class="btn btn--primary" href="#unete">Únete</a>
 </div>
 
