@@ -5,32 +5,69 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>RollersHub</title>
 <style>
+:root {
+  /* COLORES: por ahora blanco y negro. Para poner los colores de la marca, cambia solo estas variables. */
+  --accent: #111;           /* color principal (botones, íconos, detalles) */
+  --accent-hover: #333;     /* color principal al pasar el mouse */
+  --accent-soft: rgba(0, 0, 0, .06);  /* fondo suave de los íconos */
+  --accent-ring: rgba(0, 0, 0, .18);  /* aro de enfoque de los botones */
+  --on-accent: #fff;        /* texto encima del color principal */
+  --light-hover: #e6e6e6;   /* botón blanco al pasar el mouse */
+  --dark: #111;
+  /* En secciones oscuras el color principal se invierte a blanco */
+  --accent-dark: #fff;
+  --accent-dark-hover: #e6e6e6;
+  --on-accent-dark: #111;
+  --highlight-dark: #fff;   /* palabra resaltada en el título oscuro */
+  --glow-dark: rgba(255, 255, 255, .08);
+}
+.hero, .why, .cta, footer { --accent: var(--accent-dark); --accent-hover: var(--accent-dark-hover); --on-accent: var(--on-accent-dark); --accent-soft: rgba(255,255,255,.12); --accent-ring: rgba(255,255,255,.3); }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #1a1a1a; }
-[id] { scroll-margin-top: 64px; }
+[id] { scroll-margin-top: 84px; }
 .wrap { width: 100%; max-width: 1100px; margin: 0 auto; }
+
+/* ---------- Iconos SVG (trazo uniforme) ---------- */
+.i { width: 24px; height: 24px; display: block; flex: none; fill: none; stroke: currentColor; stroke-width: var(--sw, 1.85); stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Sistema de botones ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 26px; border: 0; border-radius: 21px; font-family: inherit; font-size: 16px; font-weight: 600; line-height: 1; letter-spacing: .2px; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; box-shadow: 0 0 0 5px var(--accent-ring); }
+.btn--primary { background: var(--accent); color: var(--on-accent); }
+.btn--primary:hover { background: var(--accent-hover); color: var(--on-accent); }
+.btn--light { background: #fff; color: var(--dark); }
+.btn--light:hover { background: var(--light-hover); color: var(--dark); }
+.btn--light:focus-visible { outline-color: #fff; }
+
+/* ---------- Encabezado ---------- */
 header { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #eee; z-index: 20; }
-header .bar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
-header .logo { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: .4px; color: #111; text-decoration: none; }
-header .logo img { height: 28px; width: 28px; background: #111; border-radius: 50%; padding: 3px; }
-header .actions { display: flex; gap: 12px; align-items: center; }
-.menu-btn { background: none; border: 0; font: inherit; font-size: 20px; line-height: 1; color: #111; cursor: pointer; padding: 4px 6px; border-radius: 6px; }
-.menu-btn:focus-visible, a:focus-visible { outline: 2px solid #ff5a00; outline-offset: 2px; }
+header .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; min-height: 68px; }
+header .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; letter-spacing: .6px; color: #111; text-decoration: none; white-space: nowrap; }
+header .logo img { height: 46px; width: 46px; background: #111; border-radius: 50%; padding: 5px; display: block; }
+header .actions { display: flex; gap: 4px; align-items: center; }
+.globe { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; color: #111; }
+.menu-btn { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: 0; color: #111; cursor: pointer; border-radius: 12px; }
+.menu-btn:hover { background: var(--accent-soft); color: var(--accent); }
+.menu-btn .i-close { display: none; }
+.menu-btn[aria-expanded="true"] .i-open { display: none; }
+.menu-btn[aria-expanded="true"] .i-close { display: block; }
+.menu-btn:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .nav-desk { display: none; }
 .menu { display: none; border-top: 1px solid #eee; background: #fff; padding: 8px 16px 16px; }
 .menu.open { display: block; }
 .menu a { display: block; padding: 12px 4px; color: #111; text-decoration: none; font-weight: 600; border-bottom: 1px solid #f0f0f0; }
-.menu a.btn { display: block; text-align: center; margin-top: 12px; border-bottom: 0; color: #fff; }
+.menu a.btn { display: flex; width: 100%; margin-top: 12px; padding: 0 26px; border-bottom: 0; }
+.menu a.btn--primary, .menu a.btn--primary:hover { color: var(--on-accent); }
+
 .hero { background: #111; color: #fff; text-align: center; padding: 32px 20px 0; }
 .hero h1 { font-size: 28px; line-height: 1.15; margin: 8px 0 6px; }
 .hero p { opacity: .8; margin-bottom: 20px; }
 .hero .circle { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px; border: 6px solid #fff; }
 .hero .circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero .spacer { height: 20px; }
-.btn { display: inline-block; background: #fff; color: #111; padding: 12px 28px; border-radius: 999px; font-weight: 600; text-decoration: none; }
-.btn.dark { background: #111; color: #fff; }
-.btn.orange { background: #ff5a00; color: #fff; }
 .section { padding: 28px 16px; }
 .section h2 { font-size: 22px; margin-bottom: 12px; }
 .cards { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
@@ -38,34 +75,47 @@ header .actions { display: flex; gap: 12px; align-items: center; }
 .card img { width: 100%; height: 100px; object-fit: cover; display: block; }
 .card .cap { padding: 8px 10px; font-size: 13px; font-weight: 600; }
 .icons { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: center; }
-.icons .ico { font-size: 28px; margin-bottom: 6px; }
-.why { background: #f7f7f7; }
-.why li { list-style: none; padding: 10px 0; border-bottom: 1px solid #eee; }
+.icons .ico { width: 56px; height: 56px; margin: 0 auto 8px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+.icons .ico .i { width: 30px; height: 30px; --sw: 1.5; }
+/* Por qué unirte — Propuesta B: banda oscura con pasos numerados */
+.why { background: #111; color: #fff; position: relative; overflow: hidden; padding-top: 44px; padding-bottom: 48px; }
+.why::before { content: ""; position: absolute; width: 420px; height: 420px; right: -160px; top: -180px; border-radius: 50%; background: radial-gradient(circle, var(--glow-dark), rgba(255,255,255,0) 70%); pointer-events: none; }
+.why .wrap { position: relative; }
+.why .kicker { display: inline-block; width: 48px; height: 4px; border-radius: 2px; background: var(--accent); margin-bottom: 16px; }
+.why h2 { font-size: 34px; line-height: 1.05; font-weight: 800; letter-spacing: -.5px; margin-bottom: 28px; max-width: 14ch; }
+.why h2 span { color: var(--highlight-dark); }
+.why-steps { list-style: none; display: grid; grid-template-columns: 1fr; gap: 0; counter-reset: paso; }
+.why-step { display: flex; gap: 18px; align-items: center; padding: 18px 0; border-top: 1px solid rgba(255,255,255,.14); }
+.why-step .num { font-size: 44px; font-weight: 800; line-height: 1; color: var(--accent); min-width: 64px; letter-spacing: -1px; font-variant-numeric: tabular-nums; }
+.why-step p { font-size: 17px; line-height: 1.45; color: #f2f2f2; }
 .partners { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .partners .p { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 10px; display: flex; align-items: center; justify-content: center; height: 70px; }
 .partners .p.oscuro { background: #111; border-color: #111; } /* logos claros/blancos */
 .partners .p img { max-width: 100%; max-height: 50px; width: auto; height: auto; object-fit: contain; }
 .cta { background: #111; color: #fff; text-align: center; padding: 32px 16px; }
 .cta h2 { margin-bottom: 8px; }
-footer { background: #1a1a1a; color: #ddd; padding: 24px 16px calc(90px + env(safe-area-inset-bottom)); font-size: 14px; }
-footer a { color: #ff5a00; text-decoration: none; display: inline-block; margin: 4px 10px 4px 0; }
-footer a:hover { text-decoration: underline; }
-footer .brand { margin-bottom: 12px; font-weight: 700; }
-footer .place { margin-top: 16px; opacity: .6; }
-.sticky { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 15; }
-.sticky .info { display: flex; align-items: center; gap: 8px; }
-.sticky .info img { height: 28px; width: 28px; background: #111; border-radius: 50%; padding: 3px; }
+footer { background: #1a1a1a; color: #ddd; padding: 24px 16px calc(96px + env(safe-area-inset-bottom)); font-size: 14px; }
+footer .brand { margin-bottom: 10px; font-weight: 700; letter-spacing: .6px; }
+footer .place { opacity: .7; }
+footer .credit { margin-top: 10px; opacity: .7; }
+.sticky { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #eee; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 15; }
+.sticky .info { display: flex; align-items: center; gap: 10px; }
+.sticky .info img { height: 44px; width: 44px; background: #111; border-radius: 50%; padding: 5px; display: block; }
 
 /* ---------- Tablet / escritorio ---------- */
 @media (min-width: 768px) {
-  [id] { scroll-margin-top: 72px; }
-  header .bar { padding: 14px 24px; }
+  [id] { scroll-margin-top: 92px; }
+  header .bar { padding: 12px 24px; min-height: 78px; }
+  header .logo { font-size: 20px; gap: 12px; }
+  header .logo img { height: 52px; width: 52px; padding: 6px; }
   .menu-btn, .menu, .menu.open { display: none; }
   .nav-desk { display: flex; align-items: center; gap: 22px; }
   .nav-desk a { color: #111; text-decoration: none; font-weight: 600; font-size: 15px; }
-  .nav-desk a:hover { color: #ff5a00; }
-  .nav-desk a.btn { color: #fff; padding: 9px 20px; }
-  .nav-desk a.btn:hover { color: #fff; filter: brightness(1.08); }
+  .nav-desk a:hover { color: var(--accent); }
+  .nav-desk a.btn--primary, .nav-desk a.btn--primary:hover { color: var(--on-accent); }
+  header .bar { justify-content: flex-start; }
+  .nav-desk { margin-left: auto; }
+  header .actions { margin-left: 14px; padding-left: 14px; border-left: 1px solid #eee; }
 
   .hero { padding: 56px 24px; text-align: left; }
   .hero .wrap { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; column-gap: 48px; }
@@ -83,9 +133,14 @@ footer .place { margin-top: 16px; opacity: .6; }
   .card img { height: 180px; }
   .card .cap { padding: 12px 14px; font-size: 15px; }
   .icons { grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .icons .ico { font-size: 34px; }
-  .why ul { columns: 2; column-gap: 40px; }
-  .why li { break-inside: avoid; }
+  .icons .ico { width: 64px; height: 64px; }
+  .icons .ico .i { width: 34px; height: 34px; --sw: 1.3; }
+  .why { padding-top: 72px; padding-bottom: 80px; }
+  .why::before { width: 640px; height: 640px; right: -200px; top: -280px; }
+  .why h2 { font-size: 52px; margin-bottom: 40px; max-width: none; }
+  .why-steps { grid-template-columns: repeat(2, 1fr); column-gap: 40px; }
+  .why-step { flex-direction: column; gap: 14px; padding: 24px 0 8px; }
+  .why-step .num { font-size: 64px; }
   .partners { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .partners .p { height: 110px; padding: 16px; }
   .partners .p img { max-height: 76px; }
@@ -93,9 +148,8 @@ footer .place { margin-top: 16px; opacity: .6; }
   .cta h2 { font-size: 30px; }
 
   footer { padding: 32px 24px; }
-  footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  footer .brand, footer .place { margin: 0; }
-  footer a { margin: 4px 8px; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
+  footer .brand, footer .credit { margin: 0; }
   .sticky { display: none; }
 }
 @media (min-width: 1100px) {
@@ -105,10 +159,27 @@ footer .place { margin-top: 16px; opacity: .6; }
   .hero .circle { width: 360px; height: 360px; border-width: 8px; }
   .card img { height: 220px; }
   .partners .p { height: 120px; }
+  .why h2 { font-size: 60px; }
+  .why-steps { grid-template-columns: repeat(4, 1fr); column-gap: 32px; }
+  .why-step { border-top: 2px solid rgba(255,255,255,.18); }
+  .why-step .num { font-size: 72px; }
 }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 19.5s-3-2.4-3-4.6a3 3 0 0 1 6 0c0 2.2-3 4.6-3 4.6z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.59 2.59A2 2 0 0 0 11.17 2H4a2 2 0 0 0-2 2v7.17a2 2 0 0 0 .59 1.42l8.7 8.7a2.43 2.43 0 0 0 3.42 0l6.58-6.58a2.43 2.43 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.2"/></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="16" y="3" width="5" height="5" rx="1"/><rect x="3" y="16" width="5" height="5" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></symbol>
+</svg>
 <header>
   <div class="wrap bar">
     <a class="logo" href="#inicio"><img src="img/logo-rollershub.webp" width="128" height="128" alt="Logo de RollersHub"> ROLLERS HUB</a>
@@ -119,9 +190,13 @@ footer .place { margin-top: 16px; opacity: .6; }
       <a href="#tienda">Tienda</a>
       <a href="#eventos">Eventos</a>
       <a href="#aliados">Aliados</a>
-      <a class="btn orange" href="#unete">Únete</a>
+      <a class="btn btn--primary" href="#unete">Únete</a>
     </nav>
-    <div class="actions"><span>MX</span> <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">☰</button></div>
+    <div class="actions">
+      <!-- PENDIENTE: selector de idioma -->
+      <span class="globe" role="img" aria-label="Idioma / región" title="Idioma / región"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-globe"/></svg></span>
+      <button class="menu-btn" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil"><svg class="i i-open" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg><svg class="i i-close" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button>
+    </div>
   </div>
   <nav class="menu" id="menu-movil" aria-label="Menú">
     <a href="#recos">Recos</a>
@@ -130,7 +205,7 @@ footer .place { margin-top: 16px; opacity: .6; }
     <a href="#tienda">Tienda</a>
     <a href="#eventos">Eventos</a>
     <a href="#aliados">Aliados</a>
-    <a class="btn orange" href="#unete">Únete a RollersHub</a>
+    <a class="btn btn--primary" href="#unete">Únete a RollersHub</a>
   </nav>
 </header>
 
@@ -141,7 +216,7 @@ footer .place { margin-top: 16px; opacity: .6; }
       <p>La comunidad de patinaje en Monterrey</p>
     </div>
     <div class="circle"><img src="img/hero-patinadora.webp" width="720" height="1280" fetchpriority="high" alt="Patinadora sonriente sentada en unas escaleras con sus patines en línea"></div>
-    <div class="text cta-hero"><a class="btn" href="#unete">Únete a RollersHub</a></div>
+    <div class="text cta-hero"><a class="btn btn--light" href="#unete">Únete a RollersHub</a></div>
   </div>
   <div class="spacer"></div>
 </section>
@@ -157,22 +232,23 @@ footer .place { margin-top: 16px; opacity: .6; }
 
 <section class="section" id="ventajas">
   <div class="wrap icons">
-    <div class="item"><div class="ico" aria-hidden="true">🛡️</div><div>Patina seguro con la comunidad.</div></div>
-    <div class="item"><div class="ico" aria-hidden="true">📅</div><div>Recos y eventos cerca de ti.</div></div>
-    <div class="item"><div class="ico" aria-hidden="true">🛍️</div><div>Equipo y marcas de confianza.</div></div>
-    <div class="item"><div class="ico" aria-hidden="true">🤝</div><div>Aliados que apoyan el patín.</div></div>
+    <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shield"/></svg></div><div>Patina seguro con la comunidad.</div></div>
+    <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg></div><div>Recos y eventos cerca de ti.</div></div>
+    <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-bag"/></svg></div><div>Equipo y marcas de confianza.</div></div>
+    <div class="item"><div class="ico"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-handshake"/></svg></div><div>Aliados que apoyan el patín.</div></div>
   </div>
 </section>
 
-<section class="section why" id="beneficios">
+<section class="section why why--b" id="beneficios">
   <div class="wrap">
-    <h2>Por qué unirte a RollersHub</h2>
-    <ul>
-      <li>Encuentra rodadas, talleres y eventos en Monterrey.</li>
-      <li>Conoce a otros patinadores y comparte rutas.</li>
-      <li>Accede a descuentos de tiendas y marcas aliadas.</li>
-      <li>Inscríbete a eventos y recibe tu QR de acceso.</li>
-    </ul>
+    <span class="kicker" aria-hidden="true"></span>
+    <h2>Por qué unirte a <span>RollersHub</span></h2>
+    <ol class="why-steps">
+      <li class="why-step"><span class="num" aria-hidden="true">01</span><p>Encuentra rodadas, talleres y eventos en Monterrey.</p></li>
+      <li class="why-step"><span class="num" aria-hidden="true">02</span><p>Conoce a otros patinadores y comparte rutas.</p></li>
+      <li class="why-step"><span class="num" aria-hidden="true">03</span><p>Accede a descuentos de tiendas y marcas aliadas.</p></li>
+      <li class="why-step"><span class="num" aria-hidden="true">04</span><p>Inscríbete a eventos y recibe tu QR de acceso.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -195,30 +271,21 @@ footer .place { margin-top: 16px; opacity: .6; }
     <h2>¿Quieres organizar o patrocinar?</h2>
     <p style="opacity:.8;margin-bottom:16px">Únete como organizador o aliado de RollersHub.</p>
     <!-- PENDIENTE: enlace real (formulario / URL de registro de organizadores y aliados) -->
-    <a class="btn orange" href="#unete">Regístrate</a>
+    <a class="btn btn--primary" href="#unete">Regístrate</a>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     <div class="brand">ROLLERS HUB</div>
-    <nav aria-label="Pie de página">
-      <a href="#recos">Recos</a>
-      <a href="#comunidad">Comunidad</a>
-      <!-- PENDIENTE: enlace real (Tienda: no hay página de tienda; apunta a la tarjeta "Tienda Roller") -->
-      <a href="#tienda">Tienda</a>
-      <a href="#eventos">Eventos</a>
-      <a href="#aliados">Aliados</a>
-      <!-- PENDIENTE: enlace real (Ayuda: no hay página de ayuda/contacto; apunta a la sección "Únete") -->
-      <a href="#unete">Ayuda</a>
-    </nav>
-    <p class="place">Monterrey, NL · 2026</p>
+    <p class="place">Monterrey, NL · <span id="fecha-hoy">sábado, 17 de octubre de 2026</span></p>
+    <p class="credit">Desarrollado por: Endo13 Projects</p>
   </div>
 </footer>
 
 <div class="sticky">
   <div class="info"><img src="img/logo-rollershub.webp" width="128" height="128" alt="Logo de RollersHub"><div><strong>RollersHub</strong><div style="font-size:12px;opacity:.7">Únete a la comunidad</div></div></div>
-  <a class="btn orange" href="#unete">Únete</a>
+  <a class="btn btn--primary" href="#unete">Únete</a>
 </div>
 
 <script>
@@ -229,12 +296,20 @@ footer .place { margin-top: 16px; opacity: .6; }
     menu.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-    btn.textContent = open ? '✕' : '☰';
   }
   btn.addEventListener('click', function () { setOpen(!menu.classList.contains('open')); });
   menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
   if (location.hash === '#menu') setOpen(true);
+})();
+</script>
+<script>
+(function () {
+  var el = document.getElementById('fecha-hoy');
+  try {
+    var t = new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    if (el && t) el.textContent = t;
+  } catch (e) { /* se queda el texto estático */ }
 })();
 </script>
 </body>
